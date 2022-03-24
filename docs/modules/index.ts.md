@@ -12,12 +12,26 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
+- [constructors](#constructors)
+  - [Request](#request)
 - [model](#model)
   - [Fetch (type alias)](#fetch-type-alias)
   - [Request (type alias)](#request-type-alias)
   - [Response (interface)](#response-interface)
 
 ---
+
+# constructors
+
+## Request
+
+**Signature**
+
+```ts
+export declare const Request: (method: string) => (url: string) => Request
+```
+
+Added in v0.1.0
 
 # model
 

@@ -42,3 +42,13 @@ interface Headers extends Iterable<[string, string]> {
 
   has(name: string): boolean
 }
+
+// -------------------------------------------------------------------------------------
+// constructors
+// -------------------------------------------------------------------------------------
+
+/**
+ * @category constructors
+ * @since 0.1.0
+ */
+export const Request: (method: string) => (url: string) => Request = method => url => [url, { headers: {}, method }]

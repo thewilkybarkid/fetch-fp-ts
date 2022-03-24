@@ -6,5 +6,5 @@ A fetch wrapper for use with [fp-ts].
 
 [📘 Read the documentation][docs]
 
-[docs]: https://thewilkybarkid.github.io/logger-ts/
+[docs]: https://thewilkybarkid.github.io/fetch-fp-ts/
 [fp-ts]: https://gcanti.github.io/fp-ts/
