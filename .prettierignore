@@ -1,3 +1,4 @@
 /.husky/_/
+/dist/
 /docs/**/*.ts.md
 /docs/_config.yml

@@ -5,6 +5,10 @@
   "license": "MIT",
   "homepage": "https://github.com/thewilkybarkid/fetch-fp-ts",
   "repository": "github:thewilkybarkid/fetch-fp-ts",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",
     "@commitlint/config-conventional": "^16.2.1",
@@ -12,6 +16,7 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/node": "^16.11.26",
     "@types/node-fetch": "^2.6.1",
+    "del-cli": "^4.0.1",
     "docs-ts": "^0.6.10",
     "dtslint": "github:gcanti/dtslint#2c3c3487e7650d6ca90c2877dbbd7c4c08360d0d",
     "husky": "^7.0.4",
@@ -22,6 +27,8 @@
     "typescript": "^4.6.2"
   },
   "scripts": {
+    "prebuild": "del dist",
+    "build": "tsc --project tsconfig.build.json",
     "docs": "docs-ts",
     "format": "prettier --ignore-unknown --check '**'",
     "format:fix": "npm run format -- --write",
