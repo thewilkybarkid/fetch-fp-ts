@@ -2,3 +2,4 @@
 /dist/
 /docs/**/*.ts.md
 /docs/_config.yml
+/CHANGELOG.md

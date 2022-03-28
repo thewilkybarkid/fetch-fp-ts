@@ -2,6 +2,14 @@
 
 A fetch wrapper for use with [fp-ts].
 
+## Installation
+
+To install the stable version:
+
+```sh
+npm install fetch-fp-ts
+```
+
 ## Documentation
 
 [📘 Read the documentation][docs]

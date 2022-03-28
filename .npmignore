@@ -1,0 +1,14 @@
+/.github/
+/.husky/
+/docs/
+/src/
+/test/
+/test-d/
+/.commitlintrc.json
+/.eslintignore
+/.eslintrc.json
+/.prettierignore
+/.prettierrc
+/jest.config.js
+/tsconfig.build.json
+/tsconfig.json
