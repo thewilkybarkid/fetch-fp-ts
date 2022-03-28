@@ -12,6 +12,9 @@ Added in v0.1.0
 
 <h2 class="text-delta">Table of contents</h2>
 
+- [combinators](#combinators)
+  - [setHeader](#setheader)
+  - [setHeaders](#setheaders)
 - [constructors](#constructors)
   - [Request](#request)
   - [send](#send)
@@ -22,6 +25,28 @@ Added in v0.1.0
   - [Response (interface)](#response-interface)
 
 ---
+
+# combinators
+
+## setHeader
+
+**Signature**
+
+```ts
+export declare const setHeader: (key: string, value: string) => (request: Request) => Request
+```
+
+Added in v0.1.1
+
+## setHeaders
+
+**Signature**
+
+```ts
+export declare const setHeaders: (headers: Record<string, string>) => (request: Request) => Request
+```
+
+Added in v0.1.1
 
 # constructors
 

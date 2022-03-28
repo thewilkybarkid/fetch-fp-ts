@@ -2,7 +2,7 @@ import { pipe } from 'fp-ts/function'
 import nodeFetch from 'node-fetch'
 import * as _ from '../../src'
 
-declare const r1: _.Request
+declare const request: _.Request
 declare const string: string
 declare const url: URL
 
@@ -27,4 +27,18 @@ pipe(url, _.Request(string))
 //
 
 // $ExpectType ReaderTaskEither<FetchEnv, Error, Response>
-_.send(r1)
+_.send(request)
+
+//
+// setHeaders
+//
+
+// $ExpectType Request
+pipe(request, _.setHeaders({ foo: 'bar' }))
+
+//
+// setHeader
+//
+
+// $ExpectType Request
+pipe(request, _.setHeader('foo', 'bar'))

@@ -59,4 +59,66 @@ describe('fetch-fp-ts', () => {
       })
     })
   })
+
+  describe('combinators', () => {
+    describe('setHeaders', () => {
+      test('when the headers do not exist', () => {
+        fc.assert(
+          fc.property(fc.request({ headers: {} }), fc.dictionary(fc.string(), fc.string()), (request, headers) => {
+            expect(_.setHeaders(headers)(request)).toStrictEqual([
+              request[0],
+              {
+                ...request[1],
+                headers,
+              },
+            ])
+          }),
+        )
+      })
+
+      test('when headers already exist', () => {
+        fc.assert(
+          fc.property(fc.request({ headers: { foo: 'bar' } }), request => {
+            expect(_.setHeaders({ foo: 'baz' })(request)).toStrictEqual([
+              request[0],
+              {
+                ...request[1],
+                headers: { foo: 'baz' },
+              },
+            ])
+          }),
+        )
+      })
+    })
+
+    describe('setHeader', () => {
+      test('when the header does not exist', () => {
+        fc.assert(
+          fc.property(fc.request({ headers: {} }), fc.string(), fc.string(), (request, key, value) => {
+            expect(_.setHeader(key, value)(request)).toStrictEqual([
+              request[0],
+              {
+                ...request[1],
+                headers: { [key]: value },
+              },
+            ])
+          }),
+        )
+      })
+
+      test('when the header already exists', () => {
+        fc.assert(
+          fc.property(fc.request({ headers: { foo: 'bar' } }), request => {
+            expect(_.setHeader('foo', 'baz')(request)).toStrictEqual([
+              request[0],
+              {
+                ...request[1],
+                headers: { foo: 'baz' },
+              },
+            ])
+          }),
+        )
+      })
+    })
+  })
 })

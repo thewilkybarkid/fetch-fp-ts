@@ -10,7 +10,8 @@
   "types": "dist/index.d.ts",
   "sideEffects": false,
   "peerDependencies": {
-    "fp-ts": "^2.11.0"
+    "fp-ts": "^2.11.0",
+    "monocle-ts": "^2.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",

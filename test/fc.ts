@@ -4,12 +4,12 @@ import * as _ from '../src'
 
 export * from 'fast-check'
 
-export const request = (): fc.Arbitrary<_.Request> =>
+export const request = ({ headers }: { headers?: Record<string, string> } = {}): fc.Arbitrary<_.Request> =>
   fc.tuple(
     fc.string(),
     fc.record({
       body: fc.option(fc.string(), { nil: undefined }),
-      headers: fc.dictionary(fc.string(), fc.string()),
+      headers: headers ? fc.constant(headers) : fc.dictionary(fc.string(), fc.string()),
       method: fc.string(),
     }),
   )
