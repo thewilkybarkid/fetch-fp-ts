@@ -65,7 +65,8 @@ export interface FetchEnv {
  * @category constructors
  * @since 0.1.0
  */
-export const Request: (method: string) => (url: string) => Request = method => url => [url, { headers: {}, method }]
+export const Request: (method: string) => (url: string | { href: string }) => Request = method => url =>
+  [typeof url === 'string' ? url : url.href, { headers: {}, method }]
 
 /**
  * @category constructors

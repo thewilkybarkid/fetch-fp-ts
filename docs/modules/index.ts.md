@@ -30,7 +30,7 @@ Added in v0.1.0
 **Signature**
 
 ```ts
-export declare const Request: (method: string) => (url: string) => Request
+export declare const Request: (method: string) => (url: string | { href: string }) => Request
 ```
 
 Added in v0.1.0

@@ -4,12 +4,22 @@ import * as fc from './fc'
 
 describe('fetch-fp-ts', () => {
   describe('constructors', () => {
-    test('Request', () => {
-      fc.assert(
-        fc.property(fc.string(), fc.string(), (method, url) => {
-          expect(_.Request(method)(url)).toStrictEqual([url, { headers: {}, method }])
-        }),
-      )
+    describe('Request', () => {
+      test('with a string URL', () => {
+        fc.assert(
+          fc.property(fc.string(), fc.string(), (method, url) => {
+            expect(_.Request(method)(url)).toStrictEqual([url, { headers: {}, method }])
+          }),
+        )
+      })
+
+      test('with a URL object', () => {
+        fc.assert(
+          fc.property(fc.string(), fc.string(), (method, url) => {
+            expect(_.Request(method)({ href: url })).toStrictEqual([url, { headers: {}, method }])
+          }),
+        )
+      })
     })
 
     describe('send', () => {
