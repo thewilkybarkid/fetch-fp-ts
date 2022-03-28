@@ -14,8 +14,10 @@ Added in v0.1.0
 
 - [constructors](#constructors)
   - [Request](#request)
+  - [send](#send)
 - [model](#model)
   - [Fetch (type alias)](#fetch-type-alias)
+  - [FetchEnv (interface)](#fetchenv-interface)
   - [Request (type alias)](#request-type-alias)
   - [Response (interface)](#response-interface)
 
@@ -33,6 +35,16 @@ export declare const Request: (method: string) => (url: string) => Request
 
 Added in v0.1.0
 
+## send
+
+**Signature**
+
+```ts
+export declare const send: (request: Request) => ReaderTaskEither<FetchEnv, Error, Response>
+```
+
+Added in v0.1.0
+
 # model
 
 ## Fetch (type alias)
@@ -41,6 +53,18 @@ Added in v0.1.0
 
 ```ts
 export type Fetch = (...args: Request) => Promise<Response>
+```
+
+Added in v0.1.0
+
+## FetchEnv (interface)
+
+**Signature**
+
+```ts
+export interface FetchEnv {
+  fetch: Fetch
+}
 ```
 
 Added in v0.1.0

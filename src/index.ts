@@ -1,6 +1,12 @@
 /**
  * @since 0.1.0
  */
+import * as E from 'fp-ts/Either'
+import * as R from 'fp-ts/Reader'
+import * as RTE from 'fp-ts/ReaderTaskEither'
+import * as TE from 'fp-ts/TaskEither'
+
+import ReaderTaskEither = RTE.ReaderTaskEither
 
 // -------------------------------------------------------------------------------------
 // model
@@ -43,6 +49,14 @@ interface Headers extends Iterable<[string, string]> {
   has(name: string): boolean
 }
 
+/**
+ * @category model
+ * @since 0.1.0
+ */
+export interface FetchEnv {
+  fetch: Fetch
+}
+
 // -------------------------------------------------------------------------------------
 // constructors
 // -------------------------------------------------------------------------------------
@@ -52,3 +66,10 @@ interface Headers extends Iterable<[string, string]> {
  * @since 0.1.0
  */
 export const Request: (method: string) => (url: string) => Request = method => url => [url, { headers: {}, method }]
+
+/**
+ * @category constructors
+ * @since 0.1.0
+ */
+export const send: (request: Request) => ReaderTaskEither<FetchEnv, Error, Response> = ([url, init]) =>
+  R.asks(TE.tryCatchK(({ fetch }) => fetch(url, init), E.toError))
