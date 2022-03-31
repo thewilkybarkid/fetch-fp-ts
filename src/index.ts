@@ -5,6 +5,7 @@ import * as E from 'fp-ts/Either'
 import * as R from 'fp-ts/Reader'
 import * as RTE from 'fp-ts/ReaderTaskEither'
 import * as r from 'fp-ts/Record'
+import { Refinement } from 'fp-ts/Refinement'
 import * as S from 'fp-ts/Semigroup'
 import * as TE from 'fp-ts/TaskEither'
 import { flow, pipe } from 'fp-ts/function'
@@ -38,9 +39,9 @@ type RequestInit = {
  * @category model
  * @since 0.1.0
  */
-export interface Response {
+export interface Response<S extends number = number> {
   readonly headers: Headers
-  readonly status: number
+  readonly status: S
   readonly statusText: string
   readonly url: string
 
@@ -78,6 +79,19 @@ export const Request: (method: string) => (url: string | { href: string }) => Re
  */
 export const send: (request: Request) => ReaderTaskEither<FetchEnv, Error, Response> = ([url, init]) =>
   R.asks(TE.tryCatchK(({ fetch }) => fetch(url, init), E.toError))
+
+// -------------------------------------------------------------------------------------
+// refinements
+// -------------------------------------------------------------------------------------
+
+/**
+ * @category refinements
+ * @since 0.1.1
+ */
+export const hasStatus: <S extends number>(...status: ReadonlyArray<S>) => Refinement<Response, Response<S>> =
+  (...status) =>
+  (response): response is Response<typeof status[number]> =>
+    (status as ReadonlyArray<number>).includes(response.status)
 
 // -------------------------------------------------------------------------------------
 // combinators

@@ -23,6 +23,8 @@ Added in v0.1.0
   - [FetchEnv (interface)](#fetchenv-interface)
   - [Request (type alias)](#request-type-alias)
   - [Response (interface)](#response-interface)
+- [refinements](#refinements)
+  - [hasStatus](#hasstatus)
 
 ---
 
@@ -109,9 +111,9 @@ Added in v0.1.0
 **Signature**
 
 ```ts
-export interface Response {
+export interface Response<S extends number = number> {
   readonly headers: Headers
-  readonly status: number
+  readonly status: S
   readonly statusText: string
   readonly url: string
 
@@ -120,3 +122,15 @@ export interface Response {
 ```
 
 Added in v0.1.0
+
+# refinements
+
+## hasStatus
+
+**Signature**
+
+```ts
+export declare const hasStatus: <S extends number>(...status: readonly S[]) => Refinement<Response<number>, Response<S>>
+```
+
+Added in v0.1.1

@@ -60,6 +60,37 @@ describe('fetch-fp-ts', () => {
     })
   })
 
+  describe('refinements', () => {
+    describe('hasStatus', () => {
+      test('when the status matches', () => {
+        fc.assert(
+          fc.property(fc.response(), response => {
+            expect(_.hasStatus(response.status)(response)).toBe(true)
+          }),
+        )
+      })
+
+      test('when one of the statuses matches', () => {
+        fc.assert(
+          fc.property(fc.response(), fc.integer(), (response, otherStatus) => {
+            expect(_.hasStatus(otherStatus, response.status)(response)).toBe(true)
+          }),
+        )
+      })
+
+      test('when the status does not match', () => {
+        fc.assert(
+          fc.property(
+            fc.response().filter(response => response.status !== 200),
+            response => {
+              expect(_.hasStatus(200)(response)).toBe(false)
+            },
+          ),
+        )
+      })
+    })
+  })
+
   describe('combinators', () => {
     describe('setHeaders', () => {
       test('when the headers do not exist', () => {

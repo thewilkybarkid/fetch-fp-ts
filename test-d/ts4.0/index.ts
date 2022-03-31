@@ -1,8 +1,10 @@
+import * as O from 'fp-ts/Option'
 import { pipe } from 'fp-ts/function'
 import nodeFetch from 'node-fetch'
 import * as _ from '../../src'
 
 declare const request: _.Request
+declare const response: _.Response
 declare const string: string
 declare const url: URL
 
@@ -26,8 +28,18 @@ pipe(url, _.Request(string))
 // send
 //
 
-// $ExpectType ReaderTaskEither<FetchEnv, Error, Response>
+// $ExpectType ReaderTaskEither<FetchEnv, Error, Response<number>>
 _.send(request)
+
+//
+// hasStatus
+//
+
+// $ExpectType Option<Response<200>>
+pipe(response, O.fromPredicate(_.hasStatus(200)))
+
+// $ExpectType Option<Response<200 | 201>>
+pipe(response, O.fromPredicate(_.hasStatus(200, 201)))
 
 //
 // setHeaders
