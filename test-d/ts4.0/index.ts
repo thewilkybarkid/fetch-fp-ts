@@ -1,5 +1,6 @@
+import * as E from 'fp-ts/Either'
 import * as O from 'fp-ts/Option'
-import { pipe } from 'fp-ts/function'
+import { identity, pipe } from 'fp-ts/function'
 import nodeFetch from 'node-fetch'
 import * as _ from '../../src'
 
@@ -54,3 +55,13 @@ pipe(request, _.setHeaders({ foo: 'bar' }))
 
 // $ExpectType Request
 pipe(request, _.setHeader('foo', 'bar'))
+
+//
+// getText
+//
+
+// $ExpectType TaskEither<unknown, string>
+pipe(response, _.getText(identity))
+
+// $ExpectType TaskEither<Error, string>
+pipe(response, _.getText(E.toError))

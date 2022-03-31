@@ -1,4 +1,5 @@
 import * as E from 'fp-ts/Either'
+import { identity } from 'fp-ts/function'
 import * as _ from '../src'
 import * as fc from './fc'
 
@@ -147,6 +148,40 @@ describe('fetch-fp-ts', () => {
                 headers: { foo: 'baz' },
               },
             ])
+          }),
+        )
+      })
+    })
+  })
+
+  describe('utils', () => {
+    describe('getText', () => {
+      test('when the promise returns a value', () => {
+        fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.resolve('some text') }), async response => {
+            const actual = await _.getText(identity)(response)()
+
+            expect(actual).toStrictEqual(E.right('some text'))
+          }),
+        )
+      })
+
+      test('when promise rejects with an error', () => {
+        fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.reject(new Error('some error')) }), async response => {
+            const actual = await _.getText(identity)(response)()
+
+            expect(actual).toStrictEqual(E.left(new Error('some error')))
+          }),
+        )
+      })
+
+      test('when promise rejects with a primitive', () => {
+        fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.reject('some error') }), async response => {
+            const actual = await _.getText(identity)(response)()
+
+            expect(actual).toStrictEqual(E.left('some error'))
           }),
         )
       })

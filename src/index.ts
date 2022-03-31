@@ -12,6 +12,7 @@ import { flow, pipe } from 'fp-ts/function'
 import * as L from 'monocle-ts/Lens'
 
 import ReaderTaskEither = RTE.ReaderTaskEither
+import TaskEither = TE.TaskEither
 
 // -------------------------------------------------------------------------------------
 // model
@@ -114,3 +115,13 @@ export const setHeaders: (headers: Record<string, string>) => (request: Request)
  * @since 0.1.1
  */
 export const setHeader: (key: string, value: string) => (request: Request) => Request = flow(r.singleton, setHeaders)
+
+// -------------------------------------------------------------------------------------
+// utils
+// -------------------------------------------------------------------------------------
+
+/**
+ * @since 0.1.1
+ */
+export const getText: <E>(onError: (reason: unknown) => E) => (response: Response) => TaskEither<E, string> = onError =>
+  TE.tryCatchK(response => response.text(), onError)

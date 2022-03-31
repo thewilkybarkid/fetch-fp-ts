@@ -22,13 +22,13 @@ const headerName = () =>
 const headers = () =>
   fc.option(fc.dictionary(headerName(), fc.string()), { nil: undefined }).map(init => new Headers(init))
 
-export const response = (): fc.Arbitrary<_.Response> =>
+export const response = ({ text }: { text?: Promise<string> } = {}): fc.Arbitrary<_.Response> =>
   fc.record({
     headers: headers(),
     status: fc.integer(),
     statusText: fc.string(),
     url: fc.string(),
-    text: fc.func(fc.string().map(text => Promise.resolve(text))),
+    text: fc.func(text ? fc.constant(text) : fc.string().map(text => Promise.resolve(text))),
   })
 
 export const error = (): fc.Arbitrary<Error> => fc.string().map(error => new Error(error))

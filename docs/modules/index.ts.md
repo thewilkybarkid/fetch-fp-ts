@@ -25,6 +25,8 @@ Added in v0.1.0
   - [Response (interface)](#response-interface)
 - [refinements](#refinements)
   - [hasStatus](#hasstatus)
+- [utils](#utils)
+  - [getText](#gettext)
 
 ---
 
@@ -131,6 +133,18 @@ Added in v0.1.0
 
 ```ts
 export declare const hasStatus: <S extends number>(...status: readonly S[]) => Refinement<Response<number>, Response<S>>
+```
+
+Added in v0.1.1
+
+# utils
+
+## getText
+
+**Signature**
+
+```ts
+export declare const getText: <E>(onError: (reason: unknown) => E) => (response: Response) => TE.TaskEither<E, string>
 ```
 
 Added in v0.1.1
