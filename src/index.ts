@@ -116,6 +116,21 @@ export const setHeaders: (headers: Record<string, string>) => (request: Request)
  */
 export const setHeader: (key: string, value: string) => (request: Request) => Request = flow(r.singleton, setHeaders)
 
+/**
+ * @category combinators
+ * @since 0.1.1
+ */
+export const setBody: (body: string, contentType: string) => (request: Request) => Request = (body, contentType) =>
+  flow(
+    setHeader('Content-Type', contentType),
+    pipe(
+      L.id<Request>(),
+      L.component(1),
+      L.prop('body'),
+      L.modify(() => body),
+    ),
+  )
+
 // -------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------

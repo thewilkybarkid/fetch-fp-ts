@@ -57,6 +57,13 @@ pipe(request, _.setHeaders({ foo: 'bar' }))
 pipe(request, _.setHeader('foo', 'bar'))
 
 //
+// setBody
+//
+
+// $ExpectType Request
+pipe(request, _.setBody('foo', 'bar'))
+
+//
 // getText
 //
 

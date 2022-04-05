@@ -13,6 +13,7 @@ Added in v0.1.0
 <h2 class="text-delta">Table of contents</h2>
 
 - [combinators](#combinators)
+  - [setBody](#setbody)
   - [setHeader](#setheader)
   - [setHeaders](#setheaders)
 - [constructors](#constructors)
@@ -31,6 +32,16 @@ Added in v0.1.0
 ---
 
 # combinators
+
+## setBody
+
+**Signature**
+
+```ts
+export declare const setBody: (body: string, contentType: string) => (request: Request) => Request
+```
+
+Added in v0.1.1
 
 ## setHeader
 

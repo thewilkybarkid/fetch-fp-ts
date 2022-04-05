@@ -187,4 +187,19 @@ describe('fetch-fp-ts', () => {
       })
     })
   })
+
+  test('setBody', () => {
+    fc.assert(
+      fc.property(fc.request({ headers: {} }), fc.string(), fc.string(), (request, body, contentType) => {
+        expect(_.setBody(body, contentType)(request)).toStrictEqual([
+          request[0],
+          {
+            ...request[1],
+            body,
+            headers: { 'Content-Type': contentType },
+          },
+        ])
+      }),
+    )
+  })
 })
