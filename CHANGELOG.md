@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.1...v0.1.2) (2022-04-05)
+
+
+### Features
+
+* set the body on requests ([185601c](https://github.com/thewilkybarkid/fetch-fp-ts/commit/185601c9d705898cede556180fa75691075c357d))
+
 ### [0.1.1](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.0...v0.1.1) (2022-03-31)
 
 
