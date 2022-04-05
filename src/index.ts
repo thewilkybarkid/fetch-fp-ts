@@ -118,7 +118,7 @@ export const setHeader: (key: string, value: string) => (request: Request) => Re
 
 /**
  * @category combinators
- * @since 0.1.1
+ * @since 0.1.2
  */
 export const setBody: (body: string, contentType: string) => (request: Request) => Request = (body, contentType) =>
   flow(

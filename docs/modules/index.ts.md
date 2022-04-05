@@ -41,7 +41,7 @@ Added in v0.1.0
 export declare const setBody: (body: string, contentType: string) => (request: Request) => Request
 ```
 
-Added in v0.1.1
+Added in v0.1.2
 
 ## setHeader
 
