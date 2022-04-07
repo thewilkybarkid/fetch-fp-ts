@@ -24,8 +24,8 @@ describe('fetch-fp-ts', () => {
     })
 
     describe('send', () => {
-      test('when fetch returns a response', () => {
-        fc.assert(
+      test('when fetch returns a response', async () => {
+        await fc.assert(
           fc.asyncProperty(fc.request(), fc.response(), async (request, response) => {
             const fetch: jest.MockedFunction<_.Fetch> = jest.fn((_url, _init) => Promise.resolve(response))
 
@@ -36,8 +36,8 @@ describe('fetch-fp-ts', () => {
           }),
         )
       })
-      test('when fetch throws an error', () => {
-        fc.assert(
+      test('when fetch throws an error', async () => {
+        await fc.assert(
           fc.asyncProperty(fc.request(), fc.error(), async (request, error) => {
             const fetch: _.Fetch = () => Promise.reject(error)
 
@@ -47,8 +47,8 @@ describe('fetch-fp-ts', () => {
           }),
         )
       })
-      test('when fetch throws a primitive', () => {
-        fc.assert(
+      test('when fetch throws a primitive', async () => {
+        await fc.assert(
           fc.asyncProperty(fc.request(), fc.throwablePrimitive(), async (request, error) => {
             const fetch: _.Fetch = () => Promise.reject(error)
 
@@ -156,8 +156,8 @@ describe('fetch-fp-ts', () => {
 
   describe('utils', () => {
     describe('getText', () => {
-      test('when the promise returns a value', () => {
-        fc.assert(
+      test('when the promise returns a value', async () => {
+        await fc.assert(
           fc.asyncProperty(fc.response({ text: Promise.resolve('some text') }), async response => {
             const actual = await _.getText(identity)(response)()
 
@@ -166,8 +166,8 @@ describe('fetch-fp-ts', () => {
         )
       })
 
-      test('when promise rejects with an error', () => {
-        fc.assert(
+      test('when promise rejects with an error', async () => {
+        await fc.assert(
           fc.asyncProperty(fc.response({ text: Promise.reject(new Error('some error')) }), async response => {
             const actual = await _.getText(identity)(response)()
 
@@ -176,8 +176,8 @@ describe('fetch-fp-ts', () => {
         )
       })
 
-      test('when promise rejects with a primitive', () => {
-        fc.assert(
+      test('when promise rejects with a primitive', async () => {
+        await fc.assert(
           fc.asyncProperty(fc.response({ text: Promise.reject('some error') }), async response => {
             const actual = await _.getText(identity)(response)()
 

@@ -17,8 +17,7 @@
           {
             "argsIgnorePattern": "^_"
           }
-        ],
-        "@typescript-eslint/no-floating-promises": "off"
+        ]
       }
     }
   ],
