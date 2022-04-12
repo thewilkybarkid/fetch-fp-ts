@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.2...v0.1.3) (2022-04-12)
+
+
+### Features
+
+* decode the response body ([c419d58](https://github.com/thewilkybarkid/fetch-fp-ts/commit/c419d5870acf35d6bdf78e303a7a3ffb341026e5))
+
 ### [0.1.2](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.1...v0.1.2) (2022-04-05)
 
 
