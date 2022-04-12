@@ -27,6 +27,7 @@ Added in v0.1.0
 - [refinements](#refinements)
   - [hasStatus](#hasstatus)
 - [utils](#utils)
+  - [decode](#decode)
   - [getText](#gettext)
 
 ---
@@ -149,6 +150,18 @@ export declare const hasStatus: <S extends number>(...status: readonly S[]) => R
 Added in v0.1.1
 
 # utils
+
+## decode
+
+**Signature**
+
+```ts
+export declare const decode: <A>(
+  decoder: D.Decoder<string, A>
+) => (response: Response) => TE.TaskEither<FreeSemigroup<DecodeError<string>>, A>
+```
+
+Added in v0.1.3
 
 ## getText
 

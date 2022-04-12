@@ -9,8 +9,11 @@ import { Refinement } from 'fp-ts/Refinement'
 import * as S from 'fp-ts/Semigroup'
 import * as TE from 'fp-ts/TaskEither'
 import { flow, pipe } from 'fp-ts/function'
+import * as D from 'io-ts/Decoder'
 import * as L from 'monocle-ts/Lens'
 
+import DecodeError = D.DecodeError
+import Decoder = D.Decoder
 import ReaderTaskEither = RTE.ReaderTaskEither
 import TaskEither = TE.TaskEither
 
@@ -140,3 +143,12 @@ export const setBody: (body: string, contentType: string) => (request: Request) 
  */
 export const getText: <E>(onError: (reason: unknown) => E) => (response: Response) => TaskEither<E, string> = onError =>
   TE.tryCatchK(response => response.text(), onError)
+
+/**
+ * @since 0.1.3
+ */
+export const decode: <A>(decoder: Decoder<string, A>) => (response: Response) => TaskEither<DecodeError, A> = decoder =>
+  flow(
+    getText(() => D.error(undefined, 'string')),
+    TE.chainEitherK(decoder.decode),
+  )

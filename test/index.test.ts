@@ -1,7 +1,22 @@
 import * as E from 'fp-ts/Either'
-import { identity } from 'fp-ts/function'
+import * as J from 'fp-ts/Json'
+import { flow, identity, pipe } from 'fp-ts/function'
+import * as D from 'io-ts/Decoder'
 import * as _ from '../src'
 import * as fc from './fc'
+
+export const json: D.Decoder<unknown, J.Json> = {
+  decode: i =>
+    pipe(
+      D.string.decode(i),
+      E.chain(
+        flow(
+          J.parse,
+          E.altW(() => D.failure(i, 'JSON')),
+        ),
+      ),
+    ),
+}
 
 describe('fetch-fp-ts', () => {
   describe('constructors', () => {
@@ -182,6 +197,48 @@ describe('fetch-fp-ts', () => {
             const actual = await _.getText(identity)(response)()
 
             expect(actual).toStrictEqual(E.left('some error'))
+          }),
+        )
+      })
+    })
+
+    describe('decode', () => {
+      test('when the promise returns a value that can be decoded', async () => {
+        await fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.resolve('{"foo":"bar"}') }), async response => {
+            const actual = await _.decode(json)(response)()
+
+            expect(actual).toStrictEqual(D.success({ foo: 'bar' }))
+          }),
+        )
+      })
+
+      test("when the promise returns a value that can't be decoded", async () => {
+        await fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.resolve('{"foo":"bar"') }), async response => {
+            const actual = await _.decode(json)(response)()
+
+            expect(actual).toStrictEqual(D.failure('{"foo":"bar"', 'JSON'))
+          }),
+        )
+      })
+
+      test('when promise rejects with an error', async () => {
+        await fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.reject(new Error('some error')) }), async response => {
+            const actual = await _.decode(D.id())(response)()
+
+            expect(actual).toStrictEqual(D.failure(undefined, 'string'))
+          }),
+        )
+      })
+
+      test('when promise rejects with a primitive', async () => {
+        await fc.assert(
+          fc.asyncProperty(fc.response({ text: Promise.reject('some error') }), async response => {
+            const actual = await _.decode(D.id())(response)()
+
+            expect(actual).toStrictEqual(D.failure(undefined, 'string'))
           }),
         )
       })

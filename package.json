@@ -11,6 +11,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "fp-ts": "^2.11.0",
+    "io-ts": "^2.2.0",
     "monocle-ts": "^2.3.13"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "fast-check": "^2.23.2",
     "fp-ts": "^2.11.9",
     "husky": "^7.0.4",
+    "io-ts": "^2.2.16",
     "jest": "^27.5.1",
     "monocle-ts": "^2.3.13",
     "node-fetch": "^2.6.7",

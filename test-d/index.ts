@@ -4,9 +4,12 @@ import * as O from 'fp-ts/Option'
 import * as RTE from 'fp-ts/ReaderTaskEither'
 import * as TE from 'fp-ts/TaskEither'
 import { identity, pipe } from 'fp-ts/function'
+import * as D from 'io-ts/Decoder'
 import nodeFetch from 'node-fetch'
 import * as _ from '../src'
 
+import DecodeError = D.DecodeError
+import Decoder = D.Decoder
 import Fetch = _.Fetch
 import FetchEnv = _.FetchEnv
 import Option = O.Option
@@ -18,6 +21,7 @@ declare const request: _.Request
 declare const response: Response
 declare const string: string
 declare const url: URL
+declare const numberToStringDecoder: Decoder<number, string>
 
 //
 // Fetch
@@ -70,3 +74,11 @@ expectTypeOf(pipe(request, _.setBody('foo', 'bar'))).toMatchTypeOf(request)
 
 expectTypeOf(pipe(response, _.getText(identity))).toMatchTypeOf<TaskEither<unknown, string>>()
 expectTypeOf(pipe(response, _.getText(E.toError))).toMatchTypeOf<TaskEither<Error, string>>()
+
+//
+// decode
+//
+
+expectTypeOf(pipe(response, _.decode(D.number))).toMatchTypeOf<TaskEither<DecodeError, number>>()
+// @ts-expect-error
+_.decode(numberToStringDecoder)
