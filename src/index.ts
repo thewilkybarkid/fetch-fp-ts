@@ -35,6 +35,7 @@ export type Request = [url: string, init: RequestInit]
 
 type RequestInit = {
   readonly body?: string
+  readonly cache?: 'default' | 'force-cache' | 'no-cache' | 'no-store' | 'only-if-cached' | 'reload'
   readonly headers: Record<string, string>
   readonly method: string
 }
