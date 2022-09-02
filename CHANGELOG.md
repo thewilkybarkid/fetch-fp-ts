@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.3...v0.1.4) (2022-09-02)
+
+
+### Features
+
+* support the cache option ([06efb4d](https://github.com/thewilkybarkid/fetch-fp-ts/commit/06efb4df7913a1c075dff06ccb231252ee08ae40))
+
 ### [0.1.3](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.2...v0.1.3) (2022-04-12)
 
 
