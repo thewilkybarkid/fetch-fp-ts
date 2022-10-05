@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.4...v0.1.5) (2022-10-05)
+
+
+### Features
+
+* support the signal option ([f1121e2](https://github.com/thewilkybarkid/fetch-fp-ts/commit/f1121e2ac184c59899f3e717ffd80ce328c8a9d6))
+
 ### [0.1.4](https://github.com/thewilkybarkid/fetch-fp-ts/compare/v0.1.3...v0.1.4) (2022-09-02)
 
 
