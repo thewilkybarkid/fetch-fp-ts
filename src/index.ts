@@ -38,6 +38,7 @@ type RequestInit = {
   readonly cache?: 'default' | 'force-cache' | 'no-cache' | 'no-store' | 'only-if-cached' | 'reload'
   readonly headers: Record<string, string>
   readonly method: string
+  readonly signal?: AbortSignal
 }
 
 /**
