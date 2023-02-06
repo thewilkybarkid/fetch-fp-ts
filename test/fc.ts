@@ -28,6 +28,7 @@ export const response = ({ text }: { text?: Promise<string> } = {}): fc.Arbitrar
     status: fc.integer(),
     statusText: fc.string(),
     url: fc.string(),
+    clone: fc.func(fc.constant(undefined)) as unknown as fc.Arbitrary<_.Response['clone']>,
     text: fc.func(text ? fc.constant(text) : fc.string().map(text => Promise.resolve(text))),
   })
 

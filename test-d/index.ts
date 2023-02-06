@@ -31,6 +31,13 @@ expectTypeOf(fetch).toMatchTypeOf<Fetch>()
 expectTypeOf(nodeFetch).toMatchTypeOf<Fetch>()
 
 //
+// Response
+//
+
+expectTypeOf<ReturnType<Response['clone']>>().toEqualTypeOf<Response>()
+expectTypeOf<ReturnType<Response<200>['clone']>>().toEqualTypeOf<Response<200>>()
+
+//
 // Request
 //
 

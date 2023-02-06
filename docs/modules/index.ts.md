@@ -131,6 +131,8 @@ export interface Response<S extends number = number> {
   readonly statusText: string
   readonly url: string
 
+  clone(): Response<S>
+
   text(): Promise<string>
 }
 ```
