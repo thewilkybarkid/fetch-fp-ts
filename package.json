@@ -1,7 +1,7 @@
 {
   "name": "fetch-fp-ts",
   "description": "A fetch wrapper for use with fp-ts.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "MIT",
   "homepage": "https://github.com/thewilkybarkid/fetch-fp-ts",
   "repository": "github:thewilkybarkid/fetch-fp-ts",
